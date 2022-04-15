@@ -19,9 +19,6 @@ public class BoardMoveAction implements Action {
 
 		BoardDAO dao = BoardDAO.getInstance();
 		int pageCount = dao.getListSize() / 10;
-		if( pageCount == 0 ) {
-			pageCount = 1;
-		}
 		int pageNumber = 1;
 
 		if (request.getParameter("pageNumber") != null) {
