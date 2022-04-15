@@ -1,17 +1,20 @@
 /*    */ package controller.action;
-/*    */ 
-/*    */ import com.oreilly.servlet.MultipartRequest;
-/*    */ import dto.board.BoardDAO;
-/*    */ import dto.board.BoardVo;
-/*    */ import dto.member.MemberDAO;
-/*    */ import dto.member.MemberVo;
 /*    */ import java.io.IOException;
-/*    */ import java.io.PrintStream;
 /*    */ import java.util.List;
+
 /*    */ import javax.servlet.RequestDispatcher;
 /*    */ import javax.servlet.ServletException;
 /*    */ import javax.servlet.http.HttpServletRequest;
 /*    */ import javax.servlet.http.HttpServletResponse;
+
+/*    */ 
+/*    */ import com.oreilly.servlet.MultipartRequest;
+
+/*    */ import dto.board.BoardDAO;
+/*    */ import dto.board.BoardVo;
+import dto.board.ComVo;
+/*    */ import dto.member.MemberDAO;
+/*    */ import dto.member.MemberVo;
 /*    */ 
 /*    */ public class ViewMoveAction
 /*    */   implements Action
@@ -26,17 +29,8 @@
 /* 29 */     BoardVo bVo = dao.getView(boardid);
 /*    */ 
 /* 31 */     dao.updateBoardViewCount(boardid);
-/* 32 */     List list = dao.getComList(boardid);
+/* 32 */     List<ComVo> list = dao.getComList(boardid);
 /*    */ 
-/* 34 */     MemberDAO mdao = MemberDAO.getInstance();
-/* 35 */     MemberVo mVo = mdao.getMemberVo(bVo.getId());
-/*    */ 
-/* 37 */     if (mVo == null) {
-/* 38 */       request.setAttribute("member", null);
-/* 39 */       System.out.println("mvo 널입니다.");
-/*    */     } else {
-/* 41 */       request.setAttribute("member", mVo);
-/*    */     }
 /*    */ 
 /* 44 */     request.setAttribute("board", bVo);
 /* 45 */     if (list.size() == 0)

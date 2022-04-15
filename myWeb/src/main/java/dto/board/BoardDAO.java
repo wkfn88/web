@@ -38,7 +38,7 @@
 /*     */   }
 /*     */ 
 /*     */   public boolean nextPage(int pageNumber) {
-/*  42 */     String sql = "SELECT * FROM board WHERE boardid < ? AND boardstatus = 1";
+/*  42 */     String sql = "SELECT * FROM board WHERE boardid < ?";
 /*  43 */     Connection conn = null;
 /*  44 */     PreparedStatement pstmt = null;
 /*  45 */     ResultSet rs = null;
@@ -187,11 +187,11 @@
 /*     */   }
 /*     */ 
 /*     */   public List<BoardVo> getList(int pageNumber) {
-/* 191 */     String sql = "SELECT * FROM board WHERE boardid < ? AND boardstatus = 1 ORDER BY boardid desc LIMIT 10";
+/* 191 */     String sql = "SELECT * FROM board WHERE boardid < ? ORDER BY boardid desc LIMIT 10";
 /* 192 */     Connection conn = null;
 /* 193 */     PreparedStatement pstmt = null;
 /* 194 */     ResultSet rs = null;
-/* 195 */     List list = new ArrayList();
+/* 195 */     List<BoardVo> list = new ArrayList<BoardVo>();
 /*     */     try {
 /* 197 */       conn = DBManager.getConnection();
 /* 198 */       pstmt = conn.prepareStatement(sql);
@@ -223,28 +223,28 @@
 /*     */   }
 /*     */ 
 /*     */   public int getListSize() {
-/* 227 */     String sql = "SELECT * FROM board";
+/* 227 */     String sql = "select count(*) from board";
 /* 228 */     Connection conn = null;
 /* 229 */     PreparedStatement pstmt = null;
 /* 230 */     ResultSet rs = null;
+			  int count = 0;
 /*     */     try {
 /* 232 */       conn = DBManager.getConnection();
 /* 233 */       pstmt = conn.prepareStatement(sql);
 /* 234 */       rs = pstmt.executeQuery();
 /*     */ 
-/* 236 */       int size = 0;
-/* 237 */       while (rs.next()) {
-/* 238 */         size++;
-/*     */       }
+				if( rs.next() ) {
+					count = rs.getInt(1);
+				}
 /*     */ 
-/* 241 */       return size;
+/* 241 */       return count;
 /*     */     } catch (Exception e) {
 /* 243 */       e.printStackTrace();
 /*     */     } finally {
 /* 245 */       DBManager.close(conn, pstmt);
 /*     */     }
 /*     */ 
-/* 248 */     return 0;
+/* 248 */     return count;
 /*     */   }
 /*     */ 
 /*     */   public List<ComVo> getComList(String boardid) {
@@ -281,33 +281,33 @@
 /*     */   }
 /*     */ 
 /*     */   public int getComListSize(int boardid) {
-/* 285 */     String sql = "SELECT * FROM comment WHERE boardid=?";
+/* 285 */     String sql = "select count(*) from comment where boardid = ?";
 /* 286 */     Connection conn = null;
 /* 287 */     PreparedStatement pstmt = null;
 /* 288 */     ResultSet rs = null;
+		      int count = 0;
 /*     */     try {
 /* 290 */       conn = DBManager.getConnection();
 /* 291 */       pstmt = conn.prepareStatement(sql);
 /* 292 */       pstmt.setInt(1, boardid);
 /* 293 */       rs = pstmt.executeQuery();
-/*     */ 
-/* 295 */       int size = 0;
-/* 296 */       while (rs.next()) {
-/* 297 */         size++;
-/*     */       }
-/*     */ 
-/* 300 */       return size;
+				
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+				
+/* 300 */       return count;
 /*     */     } catch (Exception e) {
 /* 302 */       e.printStackTrace();
 /*     */     } finally {
 /* 304 */       DBManager.close(conn, pstmt);
 /*     */     }
 /*     */ 
-/* 307 */     return 0;
+/* 307 */     return count;
 /*     */   }
 /*     */ 
-/*     */   public int writeBoard(String id, String title, String boardpwd, String content) {
-/* 311 */     String sql = "INSERT INTO board VALUES (?, ?, ?, ?, ?, default, default, default)";
+/*     */   public int writeBoard(String id, String title, String boardpwd, String content, int boardStatus) {
+/* 311 */     String sql = "INSERT INTO board VALUES (?, ?, ?, ?, ?, default, ?, default)";
 /* 312 */     Connection conn = null;
 /* 313 */     PreparedStatement pstmt = null;
 /*     */     try
@@ -320,6 +320,7 @@
 /* 321 */       pstmt.setString(3, boardpwd);
 /* 322 */       pstmt.setString(4, title);
 /* 323 */       pstmt.setString(5, content);
+				pstmt.setInt(6, boardStatus);
 /* 324 */       return pstmt.executeUpdate();
 /*     */     } catch (Exception e) {
 /* 326 */       e.printStackTrace();
@@ -349,6 +350,7 @@
 /* 351 */         bVo.setBoarddate(rs.getString("boarddate"));
 /* 352 */         bVo.setViewcount(rs.getInt("viewcount"));
 /* 353 */         bVo.setBoardpwd(rs.getString("boardpwd"));
+				  bVo.setBoardstatus(rs.getInt("boardstatus"));
 /* 354 */         return bVo;
 /*     */       }
 /* 356 */       return null;

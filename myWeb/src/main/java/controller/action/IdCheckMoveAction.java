@@ -1,11 +1,12 @@
 /*    */ package controller.action;
 /*    */ 
-/*    */ import com.oreilly.servlet.MultipartRequest;
 /*    */ import java.io.IOException;
 /*    */ import javax.servlet.RequestDispatcher;
 /*    */ import javax.servlet.ServletException;
 /*    */ import javax.servlet.http.HttpServletRequest;
 /*    */ import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
 /*    */ 
 /*    */ public class IdCheckMoveAction
 /*    */   implements Action
@@ -18,9 +19,13 @@
 /* 18 */     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 /* 19 */     dispatcher.forward(request, response);
 /*    */   }
-/*    */ 
-/*    */   public void execute(MultipartRequest multpartRequest, HttpServletResponse response)
-/*    */     throws ServletException, IOException
-/*    */   {
-/*    */   }
+/*    */
+
+@Override
+public void execute(MultipartRequest paramMultipartRequest, HttpServletResponse paramHttpServletResponse)
+		throws ServletException, IOException {
+	// TODO Auto-generated method stub
+	
+} 
+
 /*    */ }

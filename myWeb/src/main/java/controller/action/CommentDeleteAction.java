@@ -1,14 +1,14 @@
 /*    */ package controller.action;
 /*    */ 
-/*    */ import com.oreilly.servlet.MultipartRequest;
 /*    */ import dto.board.BoardDAO;
 /*    */ import java.io.IOException;
-/*    */ import java.io.PrintStream;
 /*    */ import java.io.PrintWriter;
 /*    */ import javax.servlet.RequestDispatcher;
 /*    */ import javax.servlet.ServletException;
 /*    */ import javax.servlet.http.HttpServletRequest;
 /*    */ import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
 /*    */ 
 /*    */ public class CommentDeleteAction
 /*    */   implements Action
@@ -51,9 +51,13 @@
 /* 53 */     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 /* 54 */     dispatcher.forward(request, response);
 /*    */   }
-/*    */ 
-/*    */   public void execute(MultipartRequest multpartRequest, HttpServletResponse response)
-/*    */     throws ServletException, IOException
-/*    */   {
-/*    */   }
+/*    */
+
+@Override
+public void execute(MultipartRequest paramMultipartRequest, HttpServletResponse paramHttpServletResponse)
+		throws ServletException, IOException {
+	// TODO Auto-generated method stub
+	
+} 
+
 /*    */ }

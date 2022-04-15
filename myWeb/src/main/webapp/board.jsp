@@ -55,7 +55,7 @@
 					<td style="text-align: center; width: 14%; font-family: Serif; font-size: 14pt;">${pageNumber } page of ${pageCount }</td>
 					<td style="text-align: left; width: 26%;">
 						<c:if test="${next != null}">
-						<a href="mainServlet?command=board_move&pageNumber=${next }"><b><i style="font-size: 18pt;" class="bi bi-chevron-double-right"></i></b></a>
+						<a href="mainServlet?command=board_move&pageNumber=${pageNumber+1 }"><b><i style="font-size: 18pt;" class="bi bi-chevron-double-right"></i></b></a>
 						</c:if>
 					</td>
 					<td style="width: 10%;">

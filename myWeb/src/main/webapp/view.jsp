@@ -140,38 +140,30 @@ th, td {
 			</table>
 		</form>
 
-
+		
 		<!--  게시판 삭제 수정 구간  -->
-		<c:if test="${userid == null }">
-			<c:choose>
-				<c:when test="${member != null }">
-					<a href="mainServlet?command=board_move&pageNumber=1"
-						class="btn btn-primary" style="color: white;">목록</a>
-				</c:when>
-				<c:otherwise>
+		<c:if test="${board.boardstatus == 1}">
+			<c:if test="${userid != null}">
+				<c:if test="${userid == board.id }">
 					<a href="mainServlet?command=board_move&pageNumber=1" class="btn btn-primary" style="color: white;">목록</a>
 					<a class="btn btn-primary" data-toggle="modal" data-target="#updateModal" style="color: white;">수정</a>
 					<a class="btn btn-primary" data-toggle="modal" data-target="#boardModal" style="color: white;">삭제</a>
-				</c:otherwise>
-			</c:choose>
+				</c:if>	
+				<c:if test="${userid != board.id }">
+					<a href="mainServlet?command=board_move&pageNumber=1" class="btn btn-primary" style="color: white;">목록</a>
+				</c:if>
+			</c:if>
+			<c:if test="${userid == null}">
+				<a href="mainServlet?command=board_move&pageNumber=1" class="btn btn-primary" style="color: white;">목록</a>
+			</c:if>
+		</c:if>
+		
+		<c:if test="${board.boardstatus == 0}">
+			<a href="mainServlet?command=board_move&pageNumber=1" class="btn btn-primary" style="color: white;">목록</a>
+			<a class="btn btn-primary" data-toggle="modal" data-target="#updateModal" style="color: white;">수정</a>
+			<a class="btn btn-primary" data-toggle="modal" data-target="#boardModal" style="color: white;">삭제</a>
 		</c:if>
 
-		<c:if test="${userid != null }">
-			<c:if test="${userid == board.id }">
-				<a href="mainServlet?command=board_move&pageNumber=1"
-					class="btn btn-primary" style="color: white;">목록</a>
-				<a class="btn btn-primary" data-toggle="modal" data-target="#updateModal" style="color: white;">수정</a>
-				<a class="btn btn-primary" data-toggle="modal" data-target="#boardModal" style="color: white;">삭제</a>
-			</c:if>
-			<c:if test="${userid != board.id }">
-				<a href="mainServlet?command=board_move&pageNumber=1"
-					class="btn btn-primary" style="color: white;">목록</a>
-			</c:if>
-			<c:if test="${member == null }">
-				<a class="btn btn-primary" data-toggle="modal" data-target="#updateModal" style="color: white;">수정</a>
-				<a class="btn btn-primary" data-toggle="modal" data-target="#boardModal" style="color: white;">삭제</a>
-			</c:if>
-		</c:if>
 	</div>
 	<br>
 	<br>
@@ -247,12 +239,7 @@ th, td {
 					</button>
 					<c:choose>
 						<c:when test="${userid != null }">
-							<c:if test="${userid == board.id }">
-								<h4 class="modal-title" id="myModalLabel">게시물 삭제 확인</h4>
-							</c:if>
-							<c:if test="${member == null }">
-								<h4 class="modal-title" id="myModalLabel">게시물 비밀번호 확인</h4>
-							</c:if>
+							<h4 class="modal-title" id="myModalLabel">게시물 삭제 확인</h4>
 						</c:when>
 						<c:otherwise>
 							<h4 class="modal-title" id="myModalLabel">게시물 비밀번호 확인</h4>
@@ -266,13 +253,7 @@ th, td {
 					<div class="modal-body">
 						<c:choose>
 						<c:when test="${userid != null }">
-							<c:if test="${userid == board.id }">
-								<h5 class="modal-title" id="myModalLabel">게시물을 삭제합니까?</h5>
-							</c:if>
-							<c:if test="${member == null }">
-								<input type="password" class="form-control" name="deleteKey"
-								placeholder="비밀번호 입력">
-							</c:if>
+							<h5 class="modal-title" id="myModalLabel">게시물을 삭제합니까?</h5>
 						</c:when>
 						<c:otherwise>
 							<input type="password" class="form-control" name="deleteKey"
@@ -301,12 +282,7 @@ th, td {
 					</button>
 					<c:choose>
 						<c:when test="${userid != null }">
-							<c:if test="${userid == board.id }">
-								<h4 class="modal-title" id="myModalLabel">수정 확인</h4>
-							</c:if>
-							<c:if test="${member == null }">
-								<h4 class="modal-title" id="myModalLabel">수정 비밀번호 확인</h4>
-							</c:if>
+							<h4 class="modal-title" id="myModalLabel">수정 확인</h4>
 						</c:when>
 						<c:otherwise>
 							<h4 class="modal-title" id="myModalLabel">수정 비밀번호 확인</h4>
@@ -320,13 +296,7 @@ th, td {
 					<div class="modal-body">
 					<c:choose>
 						<c:when test="${userid != null }">
-							<c:if test="${userid == board.id }">
-								<h5 class="modal-title" id="myModalLabel">수정화면으로 이동합니까?</h5>
-							</c:if>
-							<c:if test="${member == null }">
-								<input type="password" class="form-control" name="deleteKey"
-								placeholder="비밀번호 입력">
-							</c:if>
+							<h5 class="modal-title" id="myModalLabel">수정화면으로 이동합니까?</h5>
 						</c:when>
 						<c:otherwise>
 							<input type="password" class="form-control" name="deleteKey"
