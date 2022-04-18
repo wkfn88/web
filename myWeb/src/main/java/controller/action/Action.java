@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract interface Action
 {
-  public abstract void execute(HttpServletRequest paramHttpServletRequest, HttpServletResponse paramHttpServletResponse)
+  public abstract void execute(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException;
 
   public abstract void execute(MultipartRequest paramMultipartRequest, HttpServletResponse paramHttpServletResponse)

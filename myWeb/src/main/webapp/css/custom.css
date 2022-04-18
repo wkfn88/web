@@ -2,12 +2,20 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
+@import url(https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap);
+
 * {
 	font-family: 'Nanum Gothic';
 }
 
 h1 {
 	font-family: 'Hanna';
+}
+
+h2 {
+ 	font-family: 'Gowun Batang', serif;
+	font-size: 30pt;
+	color: #7A7A7A;
 }
 
 a:link {

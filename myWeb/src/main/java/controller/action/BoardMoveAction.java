@@ -37,13 +37,17 @@ public class BoardMoveAction implements Action {
 		} else {
 			request.setAttribute("pageCount", pageCount + 1);
 		}
+		
+		if(pageCount == 0) {
+			request.setAttribute("pageCount", 1);
+		}
 
 		if (list.size() == 0)
 			request.setAttribute("boardList", null);
 		else {
 			request.setAttribute("boardList", list);
 		}
-
+		
 		request.setAttribute("pageNumber", Integer.valueOf(pageNumber));
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

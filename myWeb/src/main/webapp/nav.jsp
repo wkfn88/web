@@ -8,7 +8,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript" src="script/empty.js"></script>
 <title>게시판 웹 사이트</title>
@@ -54,6 +58,7 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
+						<li>ID : ${userid }</li>
 						<li><a href="mainServlet?command=logout_action">로그아웃</a></li>
 						<li><a href="mainServlet?command=modification_move">회원정보수정</a></li>
 					</ul>

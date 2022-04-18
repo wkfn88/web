@@ -52,7 +52,9 @@
 /* 50 */       action = new ModMoveAction();
 /* 51 */     else if (command.equals("modification_event")) {
 /* 52 */       action = new ModEventAction();
-/*    */     }
+/*    */     }else if(command.equals("rec_event")) {
+				action = new RecEventAction();
+			 }
 /* 54 */     return action;
 /*    */   }
 /*    */ }

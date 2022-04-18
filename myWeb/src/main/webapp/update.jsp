@@ -11,6 +11,7 @@
 </head>
 <body>
 <jsp:include page="nav.jsp"/>
+
 <div class="container">
 	<div class="row">
 	<form method="post" action="mainServlet">
@@ -26,16 +27,35 @@
 				<tr>
 					<td><input type="text" class="form-control" placeholder="글 제목" name="title" maxlength="50" value="${board.title }"></td>
 				</tr>
-				<tr>
-					<td>
-						<textarea class="form-control" placeholder="글 내용" name="content" maxlength="2048" style="height: 350px;">${board.content }</textarea>
-					</td>
-				</tr>
 			</tbody>
 		</table>
+		<textarea id="content" name="content"></textarea>
 		<input type="submit" class="btn btn-primary pull-right" value="수정하기"/>
 	</form>
 	</div>
 </div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#content').val('${board.content}');
+			//여기 아래 부분
+			$('#content').summernote({
+				height : 400, // 에디터 높이
+				minHeight : null, // 최소 높이
+				maxHeight : null, // 최대 높이
+				focus : true, // 에디터 로딩후 포커스를 맞출지 여부
+				lang : "ko-KR", // 한글 설정
+				placeholder : '최대 2000자까지 쓸 수 있습니다', //placeholder 설정
+				toolbar: [
+					  ['style', ['style']],
+					  ['font', ['bold', 'underline', 'clear']],
+					  ['fontname', ['fontname']],
+					  ['color', ['color']],
+					  ['para', ['ul', 'ol', 'paragraph']],
+					  ['table', ['table']],
+					  ['insert', ['link', 'picture', 'video']]
+					]
+			});
+		});
+	</script>
 </body>
 </html>

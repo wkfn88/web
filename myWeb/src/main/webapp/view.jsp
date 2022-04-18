@@ -7,6 +7,26 @@
 <meta charset="UTF-8">
 <title>게시판 웹 사이트</title>
 <script type="text/javascript">
+	window.onload = function() {
+		var recStatus = document.getElementById('recStatus');
+		var recUp = document.getElementById('recUp');
+		var recDown = document.getElementById('recDown');
+		
+		if( recStatus.value == 0 ) {
+			recUp.style='background-color: rgb(235, 235, 235)';
+			recDown.style='background-color: rgb(235, 235, 235)';
+		}else if( recStatus.value == 1 ){
+			recUp.style='background-color: lightblue';
+			recDown.style='background-color: rgb(235, 235, 235)';
+			recDown.disabled = false;
+		}else if( recStatus.value == 2 ){
+			recUp.style='background-color: rgb(235, 235, 235)';
+			recDown.style='background-color: lightblue';
+			recUp.disabled = false;
+		}
+	}
+</script>
+<script type="text/javascript">
 function emptypwd() {
 	if( document.frmCom.commentpwd.value.length == 0 ) {
 		alert('비밀번호는 필수입니다.');
@@ -27,6 +47,7 @@ function pwdCheck(comnum) {
 function pwdCheckUser(comnum) {
 	document.frmComDelUser.comnum.value = comnum;
 }
+
 </script>
 <style type="text/css">
 table {
@@ -64,9 +85,15 @@ th, td {
 		</table>
 		
 		<!-- 게시글 본문 구간 -->					
-		<br><c:out value="${board.content}"/><br><br><br>
+		<br><c:out value="${board.content}" escapeXml="false"/><br><br><br>
 		
+		<div style="text-align: center;">
+			<input type="hidden" id="recStatus" value="${status }">
+			<button type="button" id="recUp" class="btn" onclick="location.href='mainServlet?command=rec_event&status=1&boardid=${board.boardid}&id=${userid }';"><i class="bi bi-hand-thumbs-up" style="font-size: 20pt;">${statusUpCount }</i></button> &nbsp;
+			<button type="button" id="recDown" class="btn" onclick="location.href='mainServlet?command=rec_event&status=2&boardid=${board.boardid}&id=${userid }';"><i class="bi bi-hand-thumbs-down" style="font-size: 20pt;">${statusDownCount }</i></button>
+		</div>
 		
+		<br>
 		<!-- 댓글구간 -->
 		<table class="table" style="background-color: #FAFAFA;">
 			<c:if test="${comment != null }">

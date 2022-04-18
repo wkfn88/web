@@ -6,6 +6,7 @@
 /*    */ import javax.servlet.ServletException;
 /*    */ import javax.servlet.http.HttpServletRequest;
 /*    */ import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /*    */ 
 /*    */ import com.oreilly.servlet.MultipartRequest;
@@ -13,8 +14,6 @@
 /*    */ import dto.board.BoardDAO;
 /*    */ import dto.board.BoardVo;
 import dto.board.ComVo;
-/*    */ import dto.member.MemberDAO;
-/*    */ import dto.member.MemberVo;
 /*    */ 
 /*    */ public class ViewMoveAction
 /*    */   implements Action
@@ -24,7 +23,8 @@ import dto.board.ComVo;
 /*    */   {
 /* 25 */     String url = "view.jsp";
 /* 26 */     String boardid = request.getParameter("boardid");
-/*    */ 
+			HttpSession session = request.getSession();
+/*    */ 	String id = (String) session.getAttribute("userid");
 /* 28 */     BoardDAO dao = BoardDAO.getInstance();
 /* 29 */     BoardVo bVo = dao.getView(boardid);
 /*    */ 
@@ -38,6 +38,15 @@ import dto.board.ComVo;
 /*    */     else {
 /* 48 */       request.setAttribute("comment", list);
 /*    */     }
+
+			int status = dao.getRecommend(id, boardid);
+			int statusUpCount = dao.getRecommendUpCount(boardid);
+			int statusDownCount = dao.getRecommendDownCount(boardid);
+			
+			System.out.println(status);
+			request.setAttribute("status", status);
+			request.setAttribute("statusUpCount", statusUpCount);
+			request.setAttribute("statusDownCount", statusDownCount);
 /*    */ 
 /* 51 */     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 /* 52 */     dispatcher.forward(request, response);

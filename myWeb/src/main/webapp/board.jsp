@@ -11,14 +11,16 @@
 <body>
 <jsp:include page="nav.jsp"/>
 <div class="container">
+	<h2>자유 게시판</h2>
+	<hr style="background-color: #eeeeee; height: 2px;">
 	<div>
 		<table class="table" style="text-align: center; border: 1px solid #dddddd">
 			<thead>
 				<tr>
-					<th style="background-color: #eeeeee; text-align: center; width: 8%;">번호</th>
+					<th style="background-color: #eeeeee; text-align: center; width: 10%;">번호</th>
 					<th style="background-color: #eeeeee; text-align: center; width: 50%;">제목</th>
-					<th style="background-color: #eeeeee; text-align: center; width: 12%;">작성자</th>
-					<th style="background-color: #eeeeee; text-align: center; width: 22%;">작성일</th>
+					<th style="background-color: #eeeeee; text-align: center; width: 16%;">작성자</th>
+					<th style="background-color: #eeeeee; text-align: center; width: 16%;">작성일</th>
 					<th style="background-color: #eeeeee; text-align: center; width: 8%;">조회수</th>
 				</tr>
 			</thead>
@@ -33,11 +35,11 @@
 						<c:otherwise>			
 							<c:forEach var="board" items="${boardList }">
 								<tr>
-									<td><a href="mainServlet?command=view_move&boardid=${board.boardid }"><c:out value="${board.boardid }"/></a></td>
+									<td style="width: 10%;"><a href="mainServlet?command=view_move&boardid=${board.boardid }"><c:out value="${board.boardid }"/></a></td>
 									<td style="width: 50%;"><a href="mainServlet?command=view_move&boardid=${board.boardid }"><c:out value="${board.title} [${board.commentsize }]"/></a></td>
-									<td><c:out value="${board.id }"/></td>
-									<td><c:out value="${board.boarddate }"/></td>
-									<td><c:out value="${board.viewcount }"/></td>
+									<td style="width: 16%;"><c:out value="${board.id }"/></td>
+									<td style="width: 16%;"><c:out value="${board.boarddate }"/></td>
+									<td style="width: 8%;"><c:out value="${board.viewcount }"/></td>
 								</tr>
 							</c:forEach>			
 						</c:otherwise>
@@ -53,7 +55,7 @@
 						</c:if>
 					</td>
 					<td style="text-align: center; width: 14%; font-family: Serif; font-size: 14pt;">
-					${pageNumber } page of <c:if test="${pageCount == 0}">1</c:if><c:if test="${pageCount != 0 }">${pageCount }</c:if>
+					${pageNumber } page of ${pageCount }
 					</td>
 					<td style="text-align: left; width: 26%;">
 						<c:if test="${next != null}">
